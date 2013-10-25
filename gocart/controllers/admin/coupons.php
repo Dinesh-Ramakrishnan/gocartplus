@@ -19,6 +19,15 @@ class Coupons extends Admin_Controller {
 	{
 		$data['page_title']	= lang('coupons');
 		$data['coupons']	= $this->Coupon_model->get_coupons();
+		$cc_settings = $this->Settings_model->get_settings('couponcode');
+		if(isset($cc_settings['enabled']))
+		{
+			$data['couponenabled'] = $cc_settings['enabled'];
+		}
+		else
+		{
+			$data['couponenabled'] = false;
+		}
 		
 		$this->load->view($this->config->item('admin_folder').'/coupons', $data);
 	}
@@ -201,5 +210,21 @@ class Coupons extends Admin_Controller {
 			$this->session->set_flashdata('message', lang('error_not_found'));
 			redirect($this->config->item('admin_folder').'/coupons');
 		}
+	}
+	
+	// Coupon Code functionality 
+	function enable()
+	{
+		
+		$config['enabled'] = '1';
+		$this->Settings_model->save_settings('couponcode', $config);
+		redirect($this->config->item('admin_folder').'/coupons');
+	}
+	
+	function disable() 
+	{
+		$config['enabled'] = '0';
+		$this->Settings_model->save_settings('couponcode', $config);
+		redirect($this->config->item('admin_folder').'/coupons');
 	}
 }

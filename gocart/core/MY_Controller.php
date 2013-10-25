@@ -38,6 +38,7 @@ class Front_Controller extends Base_Controller
 	//  This is Not the place to enable gift cards. It is a setting that is loaded during instantiation.
 	var $gift_cards_enabled;
 	
+	var $coupon_enabled;
 	function __construct(){
 		
 		parent::__construct();
@@ -65,6 +66,18 @@ class Front_Controller extends Base_Controller
 		{
 			$this->gift_cards_enabled = false;
 		}
+		
+		// check if coupon codes are enabled
+		$cc_setting = $this->Settings_model->get_settings('couponcode');
+		if(!empty($cc_setting['enabled']) && $cc_setting['enabled']==1)
+		{
+			$this->coupon_enabled = true;
+		}			
+		else
+		{
+			$this->coupon_enabled = false;
+		}
+		
 		
 		//load the theme package
 		$this->load->add_package_path(APPPATH.'themes/'.$this->config->item('theme').'/');

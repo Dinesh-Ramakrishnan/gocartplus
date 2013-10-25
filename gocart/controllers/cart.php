@@ -16,6 +16,7 @@ class Cart extends Front_Controller {
 		$this->load->helper('directory');
 
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
+		$data['coupon_enabled'] 	= $this->coupon_enabled;
 		$data['banners']			= $this->Banner_model->get_homepage_banners(5);
 		$data['boxes']				= $this->box_model->get_homepage_boxes(4);
 		$data['homepage']			= true;
@@ -42,7 +43,7 @@ class Cart extends Front_Controller {
 		$data['seo_title']			= (!empty($data['page']->seo_title))?$data['page']->seo_title:$data['page']->title;
 		
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		
+		$data['coupon_enabled'] 	= $this->coupon_enabled;
 		$this->load->view('page', $data);
 	}
 	
@@ -76,7 +77,7 @@ class Cart extends Front_Controller {
 		}
 		$data['page_title']			= lang('search');
 		$data['gift_cards_enabled']	= $this->gift_cards_enabled;
-		
+		$data['coupon_enabled'] 	= $this->coupon_enabled;
 		//fix for the category view page.
 		$data['base_url']			= array();
 		
@@ -107,7 +108,7 @@ class Cart extends Front_Controller {
 	
 			$data['page_title']	= lang('search');
 			$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		
+			$data['coupon_enabled'] 	= $this->coupon_enabled;
 			//set up pagination
 			$this->load->library('pagination');
 			$config['base_url']		= base_url().'cart/search/'.$code.'/';
@@ -182,7 +183,7 @@ class Cart extends Front_Controller {
 		$data['subcategories']		= $this->Category_model->get_categories($data['category']->id);
 		$data['product_columns']	= $this->config->item('product_columns');
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		
+		$data['coupon_enabled'] 	= $this->coupon_enabled;
 		$data['meta']		= $data['category']->meta;
 		$data['seo_title']	= (!empty($data['category']->seo_title))?$data['category']->seo_title:$data['category']->name;
 		$data['page_title']	= $data['category']->name;
@@ -285,7 +286,7 @@ class Cart extends Front_Controller {
 		}
 
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-					
+		$data['coupon_enabled'] 	= $this->coupon_enabled;			
 		$this->load->view('product', $data);
 	}
 	
@@ -362,7 +363,7 @@ class Cart extends Front_Controller {
 		
 		$data['page_title']	= 'View Cart';
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
-		
+		$data['coupon_enabled'] 	= $this->coupon_enabled;
 		$this->load->view('view_cart', $data);
 	}
 	

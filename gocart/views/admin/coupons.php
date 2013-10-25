@@ -6,9 +6,14 @@ function areyousure()
 }
 </script>
 
-	<a class="btn" style="float:right;" href="<?php echo site_url($this->config->item('admin_folder').'/coupons/form'); ?>"><i class="icon-plus-sign"></i> <?php echo lang('add_new_coupon');?></a>
+<?php if (!$couponenabled): ?>
+	<a class="btn btn-primary"  style="float:right;" href="<?php echo site_url($this->config->item('admin_folder').'/coupons/enable'); ?>"><i class="icon-ok icon-white"></i> <?php echo lang('enable_couponcodes');?></a>
 
-
+<?php else: ?>
+<div class="btn-group" style="float:right">
+	<a class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/coupons/form'); ?>"><i class="icon-plus-sign"></i> <?php echo lang('add_new_coupon');?></a>
+	<a class="btn btn-danger" href="<?php echo site_url($this->config->item('admin_folder').'/coupons/disable'); ?>"><i class="icon-ban-circle icon-white"></i> <?php echo lang('disable_couponcodes');?></a>
+</div>		
 <table class="table">
 	<thead>
 		<tr>
@@ -35,4 +40,5 @@ function areyousure()
 <?php endforeach; ?>
 	</tbody>
 </table>
+<?php endif;?>
 <?php include('footer.php'); ?>

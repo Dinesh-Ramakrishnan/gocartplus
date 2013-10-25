@@ -17,14 +17,19 @@
 	
 	<div class="row">
 		<div class="span5">
-			<label><?php echo lang('coupon_label');?></label>
-			<input type="text" name="coupon_code" class="span3" style="margin:0px;">
-			<input class="span2 btn" type="submit" value="<?php echo lang('apply_coupon');?>"/>
-			
+		
+			<?php if($coupon_enabled):?>
+				<label><?php echo lang('coupon_label');?></label>
+				<input type="text" name="coupon_code" class="span3" style="margin:0px;">
+				<input class="span2 btn" type="submit" value="<?php echo lang('apply_coupon');?>"/>
+			<?php endif;?>
 			<?php if($gift_cards_enabled):?>
 				<label style="margin-top:15px;"><?php echo lang('gift_card_label');?></label>
 				<input type="text" name="gc_code" class="span3" style="margin:0px;">
 				<input class="span2 btn"  type="submit" value="<?php echo lang('apply_gift_card');?>"/>
+			<?php endif;?>
+			<?php if(!$coupon_enabled && !$gift_cards_enabled): ?>
+				<div> Next </div>
 			<?php endif;?>
 		</div>
 		
